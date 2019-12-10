@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/products"
+    app:startDestination="@id/homePageFragment">
+
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.example.ec_app.fragments.productsFragments.HomePageFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" />
+    <fragment
+        android:id="@+id/electronicPageFragment"
+        android:name="com.example.ec_app.fragments.productsFragments.ElectronicPageFragment"
+        android:label="fragment_electronic_page"
+        tools:layout="@layout/fragment_electronic_page" />
+    <fragment
+        android:id="@+id/snacksPageFragment"
+        android:name="com.example.ec_app.fragments.productsFragments.SnacksPageFragment"
+        android:label="fragment_snacks_page"
+        tools:layout="@layout/fragment_snacks_page" />
+    <fragment
+        android:id="@+id/productOnShowFragment"
+        android:name="com.example.ec_app.fragments.productsFragments.ProductOnShowFragment"
+        android:label="fragment_product_on_show"
+        tools:layout="@layout/fragment_product_on_show" />
+</navigation>

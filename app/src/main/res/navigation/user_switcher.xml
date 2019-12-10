@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/protects_switcher"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.ec_app.fragments.baseFragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/buybusFragment"
+        android:name="com.example.ec_app.fragments.baseFragments.BuybusFragment"
+        android:label="fragment_buybus"
+        tools:layout="@layout/fragment_buybus" />
+    <fragment
+        android:id="@+id/userMessageFragment"
+        android:name="com.example.ec_app.fragments.baseFragments.UserMessageFragment"
+        android:label="fragment_user_message"
+        tools:layout="@layout/fragment_user_message" />
+</navigation>

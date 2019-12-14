@@ -115,14 +115,6 @@ public class ProductOnShowFragment extends Fragment {
                         })
                         .show();
 
-
-
-
-
-
-
-
-
             }
         });
     }

@@ -25,4 +25,9 @@
         android:name="com.example.ec_app.fragments.productsFragments.ProductOnShowFragment"
         android:label="fragment_product_on_show"
         tools:layout="@layout/fragment_product_on_show" />
+    <fragment
+        android:id="@+id/searchProductByNameFragment"
+        android:name="com.example.ec_app.fragments.baseFragments.SearchProductByNameFragment"
+        android:label="fragment_search_product_by_name"
+        tools:layout="@layout/fragment_search_product_by_name" />
 </navigation>

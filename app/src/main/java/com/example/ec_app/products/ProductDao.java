@@ -12,15 +12,17 @@ import java.util.List;
 @Dao//@Dao 是一个访问数据库的接口
 public interface ProductDao {
     @Insert
-    public void inserProduct(Product...products);
+    void inserProduct(Product... products);
     @Delete
-    public void deleteProduct(Product...products);
+    void deleteProduct(Product... products);
     @Update
-    public void updateProduct(Product...products);
+    void updateProduct(Product... products);
     @Query("SELECT * FROM Product")
-    public LiveData<List<Product>> getAllProducts();
+    LiveData<List<Product>> getAllProducts();
     @Query("SELECT * FROM Product WHERE protect_id = :pattern")
-    public Product getProductById(int pattern);
+    Product getProductById(int pattern);
+    @Query("SELECT * FROM Product WHERE product_name  LIKE  '%' || :pattern || '%'")
+    LiveData<List<Product>> getProductByName(String pattern);
 
 //    @Query("SELECT * FROM PRODUCT ORDER BY ID DESC")//查询，返回所有的内容，降序，最新记录放在前边
 //    public LiveData<Product> getAllProductsLive();

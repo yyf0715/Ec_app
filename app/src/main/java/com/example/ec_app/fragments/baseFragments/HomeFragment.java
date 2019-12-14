@@ -3,12 +3,15 @@ package com.example.ec_app.fragments.baseFragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
@@ -40,6 +43,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void init() {
+
         initView();
         initEvent();
     }
@@ -67,4 +71,6 @@ public class HomeFragment extends Fragment {
     private void initView() {
         radioGroup_products = getActivity().findViewById(R.id.radioGroup_products);
     }
+
+
 }

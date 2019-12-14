@@ -3,6 +3,7 @@ package com.example.ec_app.fragments.productsFragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
@@ -14,10 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.ec_app.R;
@@ -110,6 +115,7 @@ public class HomePageFragment extends Fragment {
     }
 
     private void initView() {
+        setHasOptionsMenu(true);//加载菜单项
         mLooperPager = getActivity().findViewById(R.id.sob_looper_pager);//找到轮播图的容器
         mLooperPager.setData(mInnerAdapter, new SobLooperPager.BindTitleListener() {
             @Override
@@ -120,7 +126,7 @@ public class HomePageFragment extends Fragment {
         //ViewModel
         productViewModel = ViewModelProviders.of(requireActivity()).get(ProductViewModel.class);//绑定ViewModel
 //        productViewModel.insertProduct(new Product("小米6",1999,20,R.mipmap.xiaomi6));
-        addProducts();
+//        addProducts();
         //适配器
         final ProductHomePageAdapter productHomePageAdapter = new ProductHomePageAdapter(productViewModel);
         //recyclerView
@@ -139,6 +145,35 @@ public class HomePageFragment extends Fragment {
             }
         });
 
+    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_seach_product,menu);
+        productViewModel = ViewModelProviders.of(requireActivity()).get(ProductViewModel.class);//绑定ViewModel
+
+        SearchView searchView = (SearchView) menu.findItem(R.id.app_bar_search_product).getActionView();
+        searchView.setMaxWidth(1000);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override// 当点击搜索按钮时触发该方法
+            public boolean onQueryTextSubmit(String query) {
+//            Toast.makeText(getContext(),"点击搜索框"+query,Toast.LENGTH_SHORT).show();
+            Bundle bundle = new Bundle();
+            bundle.putString("query",query);
+            String TAG = "HomePageFragment";
+//            LiveData<List<Product>> list = productViewModel.getProductByName(query);
+                Log.d(TAG, "onQueryTextSubmit: ");
+            NavController controller = Navigation.findNavController(getView());
+            controller.navigate(R.id.searchProductByNameFragment,bundle);
+
+                return false;
+            }
+
+            @Override// 当搜索内容改变时触发该方法
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
     }
 
     public void addProducts() {

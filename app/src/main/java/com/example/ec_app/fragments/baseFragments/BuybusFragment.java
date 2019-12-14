@@ -3,11 +3,13 @@ package com.example.ec_app.fragments.baseFragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,6 +24,7 @@ import com.example.ec_app.ViewModels.ProductViewModel;
 import com.example.ec_app.ViewModels.UserViewModel;
 import com.example.ec_app.adapters.BuybusAdapter;
 import com.example.ec_app.buybus.Buybus;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
 
@@ -85,7 +88,28 @@ public class BuybusFragment extends Fragment {
                 buybusAdapter.submitList(buybuses);
             }
         });
-        button_buy_product = getActivity().findViewById(R.id.button_buyProduct);
-        button_buy_allProducts = getActivity().findViewById(R.id.button_buyAllProducts);
+        //滑动删除,需要借助工具ItemTouchHelper 辅助工具
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,ItemTouchHelper.START |ItemTouchHelper.END) {
+            //允许从左往右滑动，也支持从右往左滑动
+            @Override//拖动
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override//滑动
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                final Buybus buybus = orderByUser.getValue().get(viewHolder.getAdapterPosition());
+                buybusViewModel.deleteOrder(buybus);
+                //撤销
+                Snackbar.make(getView(),"移除一个订单",Snackbar.LENGTH_SHORT)
+                        .setAction("撤销", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                buybusViewModel.insertOrder(buybus);
+                            }
+                        })//设置动作
+                        .show();
+            }
+        }).attachToRecyclerView(recyclerView_buybus);//生效
     }
 }

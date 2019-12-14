@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="商品名称"
-            android:textSize="30sp"
+            android:textSize="24sp"
             app:layout_constraintBottom_toTopOf="@+id/textView_buybus_product_price"
             app:layout_constraintEnd_toStartOf="@+id/guideline24"
             app:layout_constraintStart_toStartOf="@+id/guideline23"

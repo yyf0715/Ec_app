@@ -23,6 +23,9 @@ public class ProductViewModel extends AndroidViewModel {
     public Product getProductById(int pattern){
         return productsRepository.getProductById(pattern);
     }
+    public LiveData<List<Product>> getProductByName(String pattern){
+        return productsRepository.getProductByName(pattern);
+    }
     public void insertProduct(Product...products){
         productsRepository.insertProduct(products);
     }

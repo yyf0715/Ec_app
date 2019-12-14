@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,6 @@ public class BuybusFragment extends Fragment {
     private UserViewModel userViewModel;
     private ProductViewModel productViewModel;
     private RecyclerView recyclerView_buybus;
-    private Button button_buy_product, button_buy_allProducts;
     private LiveData<List<Buybus>> orderByUser;
 
 
@@ -61,11 +61,6 @@ public class BuybusFragment extends Fragment {
 
     private void init() {
         initView();
-        initEvent();
-    }
-
-    private void initEvent() {
-
     }
 
     private void initView() {
@@ -81,11 +76,18 @@ public class BuybusFragment extends Fragment {
         recyclerView_buybus.setLayoutManager(new LinearLayoutManager(requireActivity()));
         recyclerView_buybus.setAdapter(buybusAdapter);
 
-        orderByUser = buybusViewModel.getUserOrder(getArguments().getString("admin"));
+
+        String TAG = "BuybusFragment";
+
+        orderByUser = buybusViewModel.userBuybusOrder(getArguments().getString("admin"));
+//        orderByUser = buybusViewModel.getAllOrder();
+        Log.d(TAG, " BuybusFragment:");
         orderByUser.observe(getViewLifecycleOwner(), new Observer<List<Buybus>>() {
             @Override
             public void onChanged(List<Buybus> buybuses) {
                 buybusAdapter.submitList(buybuses);
+                String TAG = "BuybusFragment";
+                Log.d(TAG, "initView: "+ buybuses.size());
             }
         });
         //滑动删除,需要借助工具ItemTouchHelper 辅助工具

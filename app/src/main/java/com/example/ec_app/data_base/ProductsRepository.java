@@ -27,11 +27,18 @@ public class ProductsRepository {
     public LiveData<List<Product>> getProductByName(String pattern){
             return productDao.getProductByName(pattern);//添加通配符,才算模糊匹配
     }
+    public LiveData<List<Product>> getSnackProducts(){
+        return productDao.getSnackProducts();
+    }
+    public LiveData<List<Product>> getElectronicProducts(){
+        return productDao.getElectronicProducts();
+    }
     public ProductsRepository(Context context) {
         Ec_Database ec_database = Ec_Database.ec_database(context.getApplicationContext());
         productDao = ec_database.getProductDao();
         allProducts = productDao.getAllProducts();
     }
+
 
     public void insertProduct(Product... products) {
         new InserAsyncTask(productDao).execute(products);

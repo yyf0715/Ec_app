@@ -18,8 +18,8 @@ public class BuybusRepository {
         return getAllOrder;
     }
 
-    public LiveData<List<Buybus>> getUserBuybus(String pattern) {
-        return buybusDao.userBuybus(pattern);
+    public LiveData<List<Buybus>> userBuybusOrder(String pattern) {
+        return buybusDao.userBuybusOrder(pattern);
     }
 
     public BuybusRepository(Context context) {

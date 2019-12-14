@@ -177,10 +177,10 @@ public class HomePageFragment extends Fragment {
     }
 
     public void addProducts() {
-            Product product_xiaomi = new Product("小米6", 2999, 20, R.mipmap.xiaomi6);
-            Product product_xiaochi1 = new Product("小吃一", 10, 200, R.mipmap.xiaochi1);
-            Product product_xiaochi2 = new Product("小吃二", 9, 200, R.mipmap.xiaochi2);
-            Product product_xiaochi3 = new Product("小吃三", 9.8f, 200, R.mipmap.xiaochi3);
+            Product product_xiaomi = new Product("小米6", 2999, 20, R.mipmap.xiaomi6,1);
+            Product product_xiaochi1 = new Product("小吃一", 10, 200, R.mipmap.xiaochi1,0);
+            Product product_xiaochi2 = new Product("小吃二", 9, 200, R.mipmap.xiaochi2,0);
+            Product product_xiaochi3 = new Product("小吃三", 9.8f, 200, R.mipmap.xiaochi3,0);
             productViewModel.insertProduct(product_xiaomi, product_xiaochi1, product_xiaochi2, product_xiaochi3);
     }
 }

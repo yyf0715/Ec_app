@@ -22,8 +22,8 @@ public class BuybusViewModel extends AndroidViewModel {
     public LiveData<List<Buybus>> getAllOrder(){
         return buybusRepository.getGetAllOrder();
     }
-    public LiveData<List<Buybus>> getUserOrder(String pattern){
-        return buybusRepository.getUserBuybus(pattern);
+    public LiveData<List<Buybus>> userBuybusOrder(String pattern){
+        return buybusRepository.userBuybusOrder(pattern);
     }
     public void insertOrder(Buybus...buybuses){
         buybusRepository.insertOrder(buybuses);

@@ -21,7 +21,11 @@ public interface ProductDao {
     LiveData<List<Product>> getAllProducts();
     @Query("SELECT * FROM Product WHERE protect_id = :pattern")
     Product getProductById(int pattern);
-    @Query("SELECT * FROM Product WHERE product_name  LIKE  '%' || :pattern || '%'")
+    @Query("SELECT * FROM Product WHERE product_classes = 0")//得到小吃商品
+    LiveData<List<Product>> getSnackProducts();
+    @Query("SELECT * FROM Product WHERE product_classes = 1")//得到电子商品
+    LiveData<List<Product>> getElectronicProducts();
+    @Query("SELECT * FROM Product WHERE product_name  LIKE  '%' || :pattern || '%'")//模糊搜索
     LiveData<List<Product>> getProductByName(String pattern);
 
 //    @Query("SELECT * FROM PRODUCT ORDER BY ID DESC")//查询，返回所有的内容，降序，最新记录放在前边

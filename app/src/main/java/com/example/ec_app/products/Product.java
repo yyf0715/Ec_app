@@ -21,11 +21,15 @@ public class Product {
     @ColumnInfo(name = "product_res")
     private int product_res;//图片资源
 
-    public Product(String product_name, float product_price, int product_repertory, int product_res) {
+    @ColumnInfo(name = "product_classes")
+    private int product_classes;//分类 0小吃  1电子
+
+    public Product(String product_name, float product_price, int product_repertory, int product_res, int product_classes) {
         this.product_name = product_name;
         this.product_price = product_price;
         this.product_repertory = product_repertory;
         this.product_res = product_res;
+        this.product_classes = product_classes;
     }
 
     public int getProtect_id() {
@@ -66,5 +70,13 @@ public class Product {
 
     public void setProduct_res(int product_res) {
         this.product_res = product_res;
+    }
+
+    public int getProduct_classes() {
+        return product_classes;
+    }
+
+    public void setProduct_classes(int product_classes) {
+        this.product_classes = product_classes;
     }
 }

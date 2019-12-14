@@ -59,6 +59,7 @@ public class WelcomeFragment extends Fragment {
                         String admin = shp.getString(ADMIN,"");
 //                        String password = shp.getString(PASSWORD,"");
                         bundle.putString("user_admin",admin);
+                        SignInFragment.User_admin = admin;
                         controller.navigate(R.id.baseFragment,bundle);
                     }
 

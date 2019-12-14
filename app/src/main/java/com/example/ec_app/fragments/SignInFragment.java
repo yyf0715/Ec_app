@@ -1,6 +1,8 @@
 package com.example.ec_app.fragments;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -34,6 +36,10 @@ public class SignInFragment extends Fragment {
     private Button btn_in,btn_up;
     private Bundle bundle = new Bundle();
     public static String User_admin="";
+    public static final String SHP = "login";
+    public static final String ISLOGIN = "islogin";
+    public static final String ADMIN = "login_admin";
+    public static final String PASSWORD = "login_password";
 
 
     public SignInFragment() {
@@ -120,6 +126,12 @@ public class SignInFragment extends Fragment {
         }else{
             bundle.putString("user_admin",admin);
             User_admin = admin;
+            SharedPreferences shp = requireActivity().getSharedPreferences(SHP, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = shp.edit();
+            editor.putInt(ISLOGIN,1);
+            editor.putString(ADMIN,User_admin);
+            editor.putString(PASSWORD,et_password.getText().toString());
+            editor.apply();
             return true;
         }
 

@@ -1,7 +1,9 @@
 package com.example.ec_app.fragments.baseFragments;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -42,6 +44,8 @@ public class UserMessageFragment extends Fragment {
     private TextView tv_user_message_admin, tv_user_message_money;
     private EditText et_old_password, et_new_password;
     private Button button_user_rechargemoney, button_change_password, button_user_logout, button_user_exit;
+    public static final String SHP = "login";
+    public static final String ISLOGIN = "islogin";
 
 
     public UserMessageFragment() {
@@ -167,6 +171,7 @@ public class UserMessageFragment extends Fragment {
                         super.run();
                         try {
                             Thread.sleep(3000);
+                            setIsLogin();
                             NavController controller = Navigation.findNavController(getView().getRootView().findViewById(R.id.fragment));
                             controller.navigate(R.id.signInFragment);
                         } catch (InterruptedException e) {
@@ -187,6 +192,7 @@ public class UserMessageFragment extends Fragment {
                         super.run();
                         try {
                             Thread.sleep(3000);
+                            setIsLogin();
                             NavController controller = Navigation.findNavController(getView().getRootView().findViewById(R.id.fragment));
                             controller.navigate(R.id.signInFragment);
                         } catch (InterruptedException e) {
@@ -198,6 +204,12 @@ public class UserMessageFragment extends Fragment {
         });
 
 
+    }
+    public void setIsLogin(){
+        SharedPreferences shp = requireActivity().getSharedPreferences(SHP, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = shp.edit();
+        editor.putInt(ISLOGIN,0);//1 登录过    0没有登录
+        editor.apply();
     }
 
     private void initDate() {

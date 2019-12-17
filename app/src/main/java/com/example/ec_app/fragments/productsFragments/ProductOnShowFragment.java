@@ -36,7 +36,7 @@ import com.example.ec_app.products.Product;
  */
 public class ProductOnShowFragment extends Fragment {
     private ImageView iv_product_img;
-    private TextView tv_product_name,tv_product_response,tv_product_price;
+    private TextView tv_product_name, tv_product_response, tv_product_price;
     private Button button_buy_submit;
     private BuybusViewModel buybusViewModel;
     private ProductViewModel productViewModel;
@@ -68,17 +68,19 @@ public class ProductOnShowFragment extends Fragment {
     private void initData() {
         iv_product_img.setImageResource(getArguments().getInt("product_res"));
         iv_product_img.setScaleType(ImageView.ScaleType.FIT_XY);
-        tv_product_name.setText("商品名称："+getArguments().getString("product_name"));
-        tv_product_response.setText("剩余库存："+String.valueOf(getArguments().getInt("product_response")));
-        tv_product_price.setText("价格："+String.valueOf(getArguments().getFloat("product_price")));
+        tv_product_name.setText("商品名称：" + getArguments().getString("product_name"));
+        tv_product_response.setText("剩余库存：" + String.valueOf(getArguments().getInt("product_response")));
+        tv_product_price.setText("价格：" + String.valueOf(getArguments().getFloat("product_price")));
     }
 
     private void initEvent() {
         button_buy_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                String TAG = "ProductOnShowFragment";
+//                Log.d(TAG, "onClick: " + getArguments().getInt("product_id"));
                 final EditText input = new EditText(getContext());
-                input.setInputType(InputType.TYPE_CLASS_NUMBER );
+                input.setInputType(InputType.TYPE_CLASS_NUMBER);
 //                number 和 numberDecimal  属性要同时设置    这个是可以输入float类型的
                 AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
                 dialog.setTitle("加入购物车")
@@ -88,22 +90,21 @@ public class ProductOnShowFragment extends Fragment {
                         .setPositiveButton("确认", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                String TAG = "ProductOnShowFragment";
-                                Log.d(TAG, "onClick: "+productViewModel.getProductById(getArguments().getInt("product_id")).getProduct_name());
+
                                 final Product product = productViewModel.getProductById(getArguments().getInt("product_id"));
 
-                                if (Integer.valueOf(input.getText().toString())<product.getProduct_repertory()){
-                                    Toast.makeText(getContext(),"添加购物车成功，请到购物车页面查看",Toast.LENGTH_SHORT).show();
-                                    new Thread(){
+                                if (Integer.valueOf(input.getText().toString()) < product.getProduct_repertory()) {
+                                    Toast.makeText(getContext(), "添加购物车成功，请到购物车页面查看", Toast.LENGTH_SHORT).show();
+                                    new Thread() {
                                         @Override
                                         public void run() {
                                             super.run();
-                                            Buybus buybus = new Buybus(product.getProtect_id(), SignInFragment.User_admin,Integer.valueOf(input.getText().toString()));
+                                            Buybus buybus = new Buybus(product.getProtect_id(), SignInFragment.User_admin, Integer.valueOf(input.getText().toString()));
                                             buybusViewModel.insertOrder(buybus);
                                         }
                                     }.start();
-                                }else{
-                                    Toast.makeText(getContext(),"超出库存量",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "超出库存量", Toast.LENGTH_SHORT).show();
                                 }
                             }
                         })

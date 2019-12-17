@@ -96,6 +96,7 @@ public class HomePageFragment extends Fragment {
                     NavController controller = Navigation.findNavController(getView());
                     Bundle bundle = new Bundle();//传值
                     Product product = productViewModel.getProductById(mData.get(position).getProduct_id());
+                    bundle.putInt("product_id",product.getProtect_id());
                     bundle.putInt("product_res",product.getProduct_res());
                     bundle.putString("product_name",product.getProduct_name());
                     bundle.putInt("product_response",product.getProduct_repertory());
@@ -125,8 +126,6 @@ public class HomePageFragment extends Fragment {
         });
         //ViewModel
         productViewModel = ViewModelProviders.of(requireActivity()).get(ProductViewModel.class);//绑定ViewModel
-//        productViewModel.insertProduct(new Product("小米6",1999,20,R.mipmap.xiaomi6));
-//        addProducts();
         //适配器
         final ProductHomePageAdapter productHomePageAdapter = new ProductHomePageAdapter(productViewModel);
         //recyclerView
@@ -176,11 +175,5 @@ public class HomePageFragment extends Fragment {
         });
     }
 
-    public void addProducts() {
-            Product product_xiaomi = new Product("小米6", 2999, 20, R.mipmap.xiaomi6,1);
-            Product product_xiaochi1 = new Product("小吃一", 10, 200, R.mipmap.xiaochi1,0);
-            Product product_xiaochi2 = new Product("小吃二", 9, 200, R.mipmap.xiaochi2,0);
-            Product product_xiaochi3 = new Product("小吃三", 9.8f, 200, R.mipmap.xiaochi3,0);
-            productViewModel.insertProduct(product_xiaomi, product_xiaochi1, product_xiaochi2, product_xiaochi3);
-    }
+
 }
